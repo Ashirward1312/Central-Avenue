@@ -2,17 +2,18 @@ import { FaInstagram, FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/f
 import { Mail, Phone, MapPin } from "lucide-react";
 
 const NAV = [
-  { label: "Home",      href: "#home" },
-  { label: "About",     href: "#about" },
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Highlights", href: "#highlights" },
   { label: "Amenities", href: "#amenities" },
-  { label: "Contact",   href: "#contact" },
+  { label: "Contact", href: "#contact" },
 ];
 
 const SOCIALS = [
   { label: "Instagram", href: "https://instagram.com/", Icon: FaInstagram },
-  { label: "Facebook",  href: "https://facebook.com/",  Icon: FaFacebookF  },
-  { label: "LinkedIn",  href: "https://linkedin.com/",  Icon: FaLinkedinIn },
-  { label: "YouTube",   href: "https://youtube.com/",   Icon: FaYoutube    },
+  { label: "Facebook", href: "https://facebook.com/", Icon: FaFacebookF },
+  { label: "LinkedIn", href: "https://linkedin.com/", Icon: FaLinkedinIn },
+  { label: "YouTube", href: "https://youtube.com/", Icon: FaYoutube },
 ];
 
 export default function Footer() {
@@ -39,7 +40,7 @@ export default function Footer() {
               </div>
             </a>
             <p className="ft__tagline">
-              A premium commercial destination — designed for growth, built for business.
+              A premium commercial destination in Kamal Vihar, Raipur — home to food joints, gyms, salons, retail shops and corporate offices. Possession ready.
             </p>
             {/* Socials */}
             <div className="ft__socials">
@@ -77,15 +78,15 @@ export default function Footer() {
             <div className="ft__contact">
               <a href="mailto:mventures011@gmail.com" className="ft__contactRow">
                 <Mail size={14} strokeWidth={1.6} className="ft__contactIco" />
-                <span>demo011@gmail.com</span>
+                <span>mventures011@gmail.com</span>
               </a>
               <a href="tel:+918871090476" className="ft__contactRow">
                 <Phone size={14} strokeWidth={1.6} className="ft__contactIco" />
-                <span>+91 00000 00000</span>
+                <span>+91 88710 90476</span>
               </a>
               <div className="ft__contactRow">
                 <MapPin size={14} strokeWidth={1.6} className="ft__contactIco" style={{ flexShrink: 0, marginTop: "2px" }} />
-                <span>L.K Corporate And Logistic Park, Kurru, 3rd Floor, Near Karnal Vihar, Raipur (C.G)</span>
+                <span>L.K Corporate And Logistic Park, Kurru, 3rd Floor, Near Kamal Vihar, Raipur (C.G)</span>
               </div>
             </div>
           </div>
@@ -100,8 +101,24 @@ export default function Footer() {
           <span className="ft__copy">
             © {year} Central Avenue. All rights reserved.
           </span>
+
           <span className="ft__copy ft__copy--right">
-            Designed &amp; Developed with care.
+            Designed &amp; Developed With Care By{" "}
+            <a
+              href="https://spadvertising.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "inherit",
+                textDecoration: "none",
+                fontWeight: "600",
+                transition: "color 0.3s ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#C9A46D")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "inherit")}
+            >
+              SP Advertising
+            </a>
           </span>
         </div>
       </div>
@@ -179,14 +196,14 @@ export default function Footer() {
 
         .ft__logoText { display: flex; flex-direction: column; }
         .ft__logoName {
-          font-family: 'Cormorant Garamond', serif;
+          font-family: 'Poppins', sans-serif;
           font-size: 22px;
           font-weight: 600;
           color: #fff;
           line-height: 1;
         }
         .ft__logoSub {
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Poppins', sans-serif;
           font-size: 8px;
           font-weight: 700;
           letter-spacing: 0.22em;
@@ -195,7 +212,7 @@ export default function Footer() {
         }
 
         .ft__tagline {
-          font-family: 'DM Sans', sans-serif;
+          font-family: 'Poppins', sans-serif;
           font-size: 13.5px;
           line-height: 1.7;
           color: rgba(255,255,255,0.52);
@@ -228,7 +245,7 @@ export default function Footer() {
         .ft__col { display: flex; flex-direction: column; gap: 14px; }
 
         .ft__colTitle {
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Poppins', sans-serif;
           font-size: 9px;
           font-weight: 800;
           letter-spacing: 0.18em;
@@ -241,7 +258,7 @@ export default function Footer() {
         /* NAV */
         .ft__nav { display: flex; flex-direction: column; gap: 10px; }
         .ft__navLink {
-          font-family: 'DM Sans', sans-serif;
+          font-family: 'Poppins', sans-serif;
           font-size: 14px;
           color: rgba(255,255,255,0.60);
           text-decoration: none;
@@ -259,7 +276,7 @@ export default function Footer() {
           display: flex;
           gap: 10px;
           align-items: flex-start;
-          font-family: 'DM Sans', sans-serif;
+          font-family: 'Poppins', sans-serif;
           font-size: 13.5px;
           color: rgba(255,255,255,0.60);
           text-decoration: none;
@@ -289,7 +306,7 @@ export default function Footer() {
           gap: 8px;
         }
         .ft__copy {
-          font-family: 'DM Sans', sans-serif;
+          font-family: 'Poppins', sans-serif;
           font-size: 12px;
           color: rgba(255,255,255,0.38);
         }

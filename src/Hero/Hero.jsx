@@ -2,10 +2,10 @@ import img1 from "../Images/Park.PNG";
 import { ArrowDown, ArrowUpRight, MapPin, ShoppingBag, Building2, Monitor, Landmark } from "lucide-react";
 
 const STATS = [
-  { Icon: ShoppingBag, label: "Retail Spaces",   sub: "For growing brands" },
-  { Icon: Building2,   label: "Showrooms",        sub: "Designed for visibility" },
-  { Icon: Monitor,     label: "Office Spaces",    sub: "For modern businesses" },
-  { Icon: Landmark,    label: "Prime Location",   sub: "In Kamal Vihar" },
+  { Icon: ShoppingBag,  label: "Retail & Shops",    sub: "Ground & upper floor units" },
+  { Icon: Building2,    label: "Office Spaces",      sub: "Contemporary suites" },
+  { Icon: Monitor,      label: "Food & Dining",      sub: "Restaurants & cafés" },
+  { Icon: Landmark,     label: "Possession Ready",   sub: "Move in immediately" },
 ];
 
 export default function Hero() {
@@ -41,9 +41,7 @@ export default function Hero() {
 
               {/* Description */}
               <p className="hero__desc">
-                A thoughtfully designed commercial address in Kamal Vihar — where
-                contemporary architecture, refined retail spaces and modern offices
-                come together in one vibrant destination.
+                Kamal Vihar's most vibrant commercial landmark — home to leading food joints, premium retail shops, corporate offices, salons and fitness studios. A destination where businesses prosper and customers keep coming back.
               </p>
 
               {/* Location */}

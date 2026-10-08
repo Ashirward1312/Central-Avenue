@@ -1,5 +1,9 @@
-import { useId, useMemo, useState } from "react";
-import img1 from "../Images/hh.png";
+import { useState } from "react";
+import imgBuilding from "../Images/hh.png";
+import imgParking  from "../Images/parking.jpg";
+import imgFood     from "../Images/food.jpg";
+import imgTarget   from "../Images/Target.jpg";
+
 import {
   ShieldCheck,
   Camera,
@@ -12,700 +16,754 @@ import {
   Users,
   CheckCircle2,
   Lightbulb,
+  UtensilsCrossed,
+  Dumbbell,
+  Scissors,
   ChevronRight,
-  Diamond
+  ArrowUpRight,
+  BadgeCheck,
 } from "lucide-react";
 
+/* ─────────────────────────────────────────────
+   TAB DATA — each tab gets its own image + content
+───────────────────────────────────────────── */
 const TABS = [
-  { id: "safety", label: "Safety & Security", Icon: ShieldCheck },
-  { id: "parking", label: "Parking & Access", Icon: ParkingSquare },
-  { id: "utilities", label: "Utilities", Icon: Zap },
-  { id: "support", label: "Business Support", Icon: Building2 },
-];
-
-const PANELS = {
-  safety: {
+  {
+    id: "safety",
+    label: "Safety & Security",
+    subLabel: "24 / 7 protection",
+    Icon: ShieldCheck,
+    image: imgBuilding,
+    imageAlt: "Central Avenue — secure commercial destination",
+    accentColor: "#3B82F6",   /* blue tint for safety */
     title: "Safety & Security",
-    intro: "Secure planning for daily operations and customer confidence.",
+    tagline: "Your Business Deserves a Safe Home.",
+    intro:
+      "At Central Avenue, the security of your business, your staff and your customers is our top priority. A layered security framework ensures the complex operates safely and confidently around the clock.",
     features: [
-      { Icon: Camera, title: "CCTV Coverage", text: "Common-area surveillance (as per plan)." },
-      { Icon: ShieldCheck, title: "Security Support", text: "Project-level security assistance." },
-      { Icon: FireExtinguisher, title: "Fire Safety", text: "Provisions as per applicable norms." },
+      {
+        Icon: Camera,
+        title: "24 / 7 CCTV Surveillance",
+        text: "High-definition cameras cover all common areas, entry & exit points and parking zones without any blind spots.",
+      },
+      {
+        Icon: ShieldCheck,
+        title: "On-Site Security Personnel",
+        text: "Trained, uniformed security staff are deployed across the complex during all business hours.",
+      },
+      {
+        Icon: FireExtinguisher,
+        title: "Fire Safety Systems",
+        text: "Fire suppression systems, extinguishers and clearly marked emergency exits installed as per statutory norms.",
+      },
+      {
+        Icon: Lightbulb,
+        title: "Well-Lit Premises",
+        text: "Bright, energy-efficient lighting throughout lobbies, corridors, stairwells and parking areas for maximum visibility.",
+      },
     ],
-    extras: ["Well-lit common areas", "Controlled entry/exit planning"],
+    extras: [
+      "Controlled entry & exit management",
+      "Emergency response planning",
+      "Periodic security audits",
+    ],
   },
-  parking: {
+  {
+    id: "parking",
+    label: "Parking & Access",
+    subLabel: "Ample space for all",
+    Icon: ParkingSquare,
+    image: imgParking,
+    imageAlt: "Ample parking at Central Avenue Kamal Vihar",
+    accentColor: "#10B981",   /* green tint for parking */
     title: "Parking & Access",
-    intro: "Convenient access and smoother movement for visitors & occupants.",
+    tagline: "Never Lose a Customer to a Parking Problem.",
+    intro:
+      "Central Avenue boasts one of the largest and best-organised parking facilities in Kamal Vihar — a critical differentiator that ensures customers and clients always find a convenient spot.",
     features: [
-      { Icon: ParkingSquare, title: "Parking Availability", text: "Visitor/occupant parking (as per plan)." },
-      { Icon: Accessibility, title: "Easy Accessibility", text: "Better circulation & reduced congestion." },
-      { Icon: Users, title: "Customer-Friendly Layout", text: "Planned for simple navigation." },
+      {
+        Icon: ParkingSquare,
+        title: "Ample Four-Wheeler Bays",
+        text: "Clearly marked, spacious car parking bays with smooth internal circulation to eliminate bottlenecks.",
+      },
+      {
+        Icon: Accessibility,
+        title: "Dedicated Two-Wheeler Zone",
+        text: "Separate, secure motorcycle and scooter parking areas to keep all visitors comfortable.",
+      },
+      {
+        Icon: Users,
+        title: "Customer-First Layout",
+        text: "Pedestrian walkways, drop-off zones and directional signage make navigation effortless for every visitor.",
+      },
+      {
+        Icon: ShieldCheck,
+        title: "Security-Monitored Parking",
+        text: "CCTV coverage and security staff presence across all parking zones for complete peace of mind.",
+      },
     ],
-    extras: ["Clear zone markings", "Drop-off zone (as applicable)"],
+    extras: [
+      "Drop-off & pick-up zones",
+      "Separate staff & visitor parking",
+      "24-hour access during business hours",
+    ],
   },
-  utilities: {
-    title: "Utilities",
-    intro: "Essential services planned for everyday commercial use.",
+  {
+    id: "dining",
+    label: "Food & Dining",
+    subLabel: "Restaurant & café hub",
+    Icon: UtensilsCrossed,
+    image: imgFood,
+    imageAlt: "Food joints and dining at Central Avenue",
+    accentColor: "#F59E0B",   /* amber tint for food */
+    title: "Food & Dining Hub",
+    tagline: "The Most Delicious Destination in Kamal Vihar.",
+    intro:
+      "Central Avenue houses a vibrant selection of food joints, restaurant chains and cafés — making it the go-to dining hub for residents, office-goers and shoppers across Kamal Vihar and beyond.",
     features: [
-      { Icon: Zap, title: "Power Provision", text: "Commercial power planning (terms apply)." },
-      { Icon: Droplets, title: "Water Supply", text: "Regular supply provisions as planned." },
-      { Icon: Lightbulb, title: "Lighting", text: "Comfortable movement across zones." },
+      {
+        Icon: UtensilsCrossed,
+        title: "Multi-Cuisine Food Court",
+        text: "A dedicated food court zone bringing together diverse cuisines, QSR brands and specialty restaurants under one roof.",
+      },
+      {
+        Icon: Users,
+        title: "Outdoor Dining Spaces",
+        text: "Beautifully landscaped outdoor seating areas that create a vibrant al fresco dining experience.",
+      },
+      {
+        Icon: Building2,
+        title: "F&B Brand Spaces Available",
+        text: "Ready-to-fit units ideal for national restaurant chains, cloud kitchens and specialty café brands.",
+      },
+      {
+        Icon: Zap,
+        title: "Commercial Kitchen Provisions",
+        text: "Power, water and ventilation provisions planned to support full commercial kitchen operations.",
+      },
     ],
-    extras: ["Waste management support", "Connectivity ready (provider dependent)"],
+    extras: [
+      "High daily footfall from offices & retail",
+      "Ideal for QSR, casual dining & cafés",
+      "Delivery-friendly infrastructure",
+    ],
   },
-  support: {
+  {
+    id: "support",
+    label: "Business Support",
+    subLabel: "Built for every brand",
+    Icon: Building2,
+    image: imgTarget,
+    imageAlt: "Diverse businesses — gym, salon, shops, offices at Central Avenue",
+    accentColor: "#8B5CF6",   /* purple tint for support */
     title: "Business Support",
-    intro: "An ecosystem designed to help brands operate smoothly.",
+    tagline: "Every Business Finds Its Perfect Space Here.",
+    intro:
+      "Central Avenue is designed for the full spectrum of commercial enterprise — from premium gyms and modern salons to leading retail boutiques and corporate offices. A complete, self-sustaining business ecosystem.",
     features: [
-      { Icon: Building2, title: "Multiple Formats", text: "Shops, showrooms & offices (availability-based)." },
-      { Icon: ShieldCheck, title: "Upkeep Support", text: "Common-area maintenance assistance." },
-      { Icon: ParkingSquare, title: "Convenience", text: "Access + layout support daily flow." },
+      {
+        Icon: Dumbbell,
+        title: "Gym & Fitness Studios",
+        text: "Large-format units with high ceilings and ample power — ideal for premium gyms, yoga studios and wellness centres.",
+      },
+      {
+        Icon: Scissors,
+        title: "Salons & Beauty Clinics",
+        text: "Dedicated spaces for premium salons, beauty clinics and spas with excellent visibility and customer flow.",
+      },
+      {
+        Icon: Building2,
+        title: "Corporate Offices",
+        text: "Contemporary, light-filled office suites designed for productivity, professional image and client impressions.",
+      },
+      {
+        Icon: BadgeCheck,
+        title: "Common Area Maintenance",
+        text: "Professional upkeep of all shared lobbies, corridors, façades and landscaping for a premium appearance year-round.",
+      },
     ],
-    extras: ["Footfall-friendly planning", "Long-term value by design"],
+    extras: [
+      "200+ diverse commercial units",
+      "Retail shops & showroom spaces",
+      "Long-term brand visibility & footfall",
+    ],
   },
-};
-
-const CHIPS = [
-  { Icon: ShieldCheck, text: "Security support" },
-  { Icon: Camera, text: "CCTV (common areas)" },
-  { Icon: ParkingSquare, text: "Parking availability" },
 ];
 
+/* ─────────────────────────────────────────────
+   COMPONENT
+───────────────────────────────────────────── */
 export default function Amenities() {
   const [active, setActive] = useState("safety");
-  const panel = useMemo(() => PANELS[active], [active]);
-
-  const uid = useId();
-  const panelId = `am-panel-${uid}`;
+  const tab = TABS.find((t) => t.id === active);
 
   return (
     <section id="amenities" className="am">
-      {/* Side Decorative Text (optional) */}
-      <div className="am__side am__side--left">
-        <span>MODERN</span>
-        <span>BUSINESS</span>
-        <span>SPACES</span>
-      </div>
-      <div className="am__side am__side--right">
-        <span>WORK</span>
-        <span>CONNECT</span>
-        <span>GROW</span>
-      </div>
-
       <div className="am__inner">
-        {/* HERO */}
-        <header className="am__hero">
+
+        {/* ── SECTION HEADER ── */}
+        <div className="am__header">
           <div className="am__kicker">
             <span className="am__kLine" />
             <span className="am__kText">AMENITIES & FACILITIES</span>
             <span className="am__kLine" />
           </div>
-
-          <h2 className="am__h2">EVERYTHING YOU NEED</h2>
+          <h2 className="am__h2">Everything Your Business Needs</h2>
           <h3 className="am__h3">Under One Roof.</h3>
-
-          <p className="am__para">
-            A clean, secure and convenient commercial environment — <br />
-            planned to support businesses and improve customer experience.
+          <p className="am__headerPara">
+            Central Avenue is built with every infrastructure and lifestyle
+            amenity a modern commercial destination demands — select a
+            category below to explore what awaits you.
           </p>
+        </div>
 
-          <div className="am__chips" aria-label="Highlights">
-            {CHIPS.map((chip) => (
-              <div key={chip.text} className="am__chip">
-                <div className="am__chipIcoWrap">
-                  <chip.Icon size={16} strokeWidth={1.5} />
-                </div>
-                <span>{chip.text}</span>
-              </div>
-            ))}
+        {/* ── TAB SELECTOR BAR ── */}
+        <div className="am__tabBar" role="tablist" aria-label="Amenity categories">
+          {TABS.map(({ id, label, subLabel, Icon }) => {
+            const isActive = active === id;
+            return (
+              <button
+                key={id}
+                role="tab"
+                type="button"
+                aria-selected={isActive}
+                className={`am__tabBtn${isActive ? " is-active" : ""}`}
+                onClick={() => setActive(id)}
+              >
+                <span className="am__tabBtnIco">
+                  <Icon size={20} strokeWidth={1.5} />
+                </span>
+                <span className="am__tabBtnLabels">
+                  <span className="am__tabBtnLabel">{label}</span>
+                  <span className="am__tabBtnSub">{subLabel}</span>
+                </span>
+                <ChevronRight size={14} className="am__tabBtnArrow" />
+              </button>
+            );
+          })}
+        </div>
+
+        {/* ── MAIN PANEL ── */}
+        <div className="am__panel" key={active} role="tabpanel">
+
+          {/* LEFT — IMAGE */}
+          <div className="am__panelImg">
+            <img
+              src={tab.image}
+              alt={tab.imageAlt}
+              className="am__panelImgEl"
+            />
+            {/* Gradient overlay */}
+            <div className="am__panelImgGrad" />
+            {/* Floating label on image */}
+            <div className="am__panelImgBadge">
+              <tab.Icon size={14} strokeWidth={1.5} />
+              <span>{tab.label}</span>
+            </div>
+            {/* Tagline ribbon */}
+            <div className="am__panelTagline">"{tab.tagline}"</div>
           </div>
 
-          <div className="am__cta">
-            <a href="#contact" className="am__btn am__btn--gold">
-              ENQUIRE NOW &nbsp;&rarr;
-            </a>
-            <a href="#contact" className="am__btn am__btn--outline">
-              PRICE ON REQUEST
-            </a>
-          </div>
-        </header>
+          {/* RIGHT — CONTENT */}
+          <div className="am__panelBody">
 
-        {/* MAIN LAYOUT */}
-        <div className="am__layout">
-          {/* LEFT NAV BOX */}
-          <aside className="am__navBox" aria-label="Amenity categories">
-            <div className="am__navHead">
-              <div className="am__navSup">CATEGORIES</div>
-              <div className="am__navTitle">
-                Click to View <span>Details</span>
+            {/* Head */}
+            <div className="am__panelHead">
+              <div className="am__panelHeadIco">
+                <tab.Icon size={22} strokeWidth={1.5} />
+              </div>
+              <div>
+                <div className="am__panelHeadSup">SELECTED CATEGORY</div>
+                <div className="am__panelHeadTitle">{tab.title}</div>
               </div>
             </div>
 
-            <div className="am__navBody">
-              {TABS.map(({ id, label, Icon }) => {
-                const isActive = active === id;
-                return (
-                  <button
-                    key={id}
-                    type="button"
-                    className={`am__navRow ${isActive ? "isActive" : ""}`}
-                    aria-controls={panelId}
-                    aria-current={isActive ? "true" : "false"}
-                    onClick={() => setActive(id)}
-                  >
-                    <div className="am__navRowLeft">
-                      <div className="am__navRowIcon">
-                        <Icon size={18} strokeWidth={1.5} />
-                      </div>
-                      <span className="am__navRowLabel">{label}</span>
-                    </div>
-                    <ChevronRight size={16} className="am__navRowArrow" />
-                  </button>
-                );
-              })}
-            </div>
+            {/* Intro */}
+            <p className="am__panelIntro">{tab.intro}</p>
 
-            <div className="am__navFooter">
-              <span className="am__navFooterLine"></span>
-              <span className="am__navFooterText">PREMIUM COMMERCIAL SPACES</span>
-              <span className="am__navFooterLine"></span>
-            </div>
-          </aside>
-
-          {/* RIGHT PANEL BOX */}
-          <div
-            className="am__panelBox"
-            id={panelId}
-            role="region"
-            aria-label="Selected amenity details"
-          >
-            <div className="am__panelContent">
-              <div className="am__panelHeadRow">
-                <div className="am__panelHeadLeft">
-                  <div className="am__panelSup">SELECTED</div>
-                  <div className="am__panelTitle">{panel.title}</div>
-                </div>
-                {/* <div className="am__panelHeadRight">
-                  <span>SPACES</span>
-                  <span>BUILT FOR</span>
-                  <span>BUSINESS</span>
-                </div> */}
-              </div>
-
-              <p className="am__intro">{panel.intro}</p>
-
-              <div className="am__featuresGrid">
-                {panel.features.map(({ Icon, title, text }) => (
-                  <div key={title} className="am__feat">
-                    <div className="am__featIconWrap">
-                      <Icon size={18} strokeWidth={1.5} />
-                    </div>
-                    <div className="am__featBody">
-                      <span className="am__featTitle">{title}</span>
-                      <span className="am__featText">{text}</span>
-                    </div>
+            {/* Feature grid */}
+            <div className="am__featGrid">
+              {tab.features.map(({ Icon, title, text }) => (
+                <div key={title} className="am__feat">
+                  <div className="am__featIco">
+                    <Icon size={17} strokeWidth={1.5} />
                   </div>
-                ))}
-              </div>
-
-              <div className="am__extras">
-                {panel.extras.map((x) => (
-                  <span key={x} className="am__pill">
-                    <CheckCircle2 size={16} strokeWidth={1.5} className="am__pillIco" />
-                    {x}
-                  </span>
-                ))}
-              </div>
+                  <div className="am__featCopy">
+                    <span className="am__featTitle">{title}</span>
+                    <span className="am__featText">{text}</span>
+                  </div>
+                </div>
+              ))}
             </div>
 
-            {/* Image */}
-            <img src={img1} alt="Building view" className="am__panelImg" />
+           
           </div>
         </div>
 
-        {/* BOTTOM BAND */}
-        <div className="am__band" id="contact">
-          <img src={img1} alt="" className="am__bandImg" aria-hidden="true" />
-          <div className="am__bandContent">
-            <div className="am__bandIcon">
-              <Diamond size={24} strokeWidth={1} color="#C9A45C" />
-            </div>
-            <div className="am__bandText">
+        {/* ── BOTTOM CTA BAND ── */}
+        <div className="am__band">
+          <img src={imgBuilding} alt="" className="am__bandBg" aria-hidden="true" />
+          <div className="am__bandInner">
+            <div className="am__bandLeft">
               <div className="am__bandSup">PLAN YOUR SPACE</div>
               <div className="am__bandTitle">
-                Need full amenities list & <span>unit details?</span>
+                Ready to find your perfect unit at{" "}
+                <span>Central Avenue?</span>
               </div>
               <div className="am__bandSub">
-                Share your requirement (Shop / Showroom / Office) — we’ll send availability & pricing.
+                Share your requirement — Shop / Showroom / Office / Gym / Salon / Restaurant — and we will send you availability &amp; pricing immediately.
               </div>
             </div>
+            <a href="#contact" className="am__bandBtn">
+              GET IN TOUCH &nbsp;→
+            </a>
           </div>
-
-          <a href="#contact" className="am__bandBtn">
-            ENQUIRE NOW &nbsp;&rarr;
-          </a>
         </div>
+
       </div>
 
+      {/* ══════════════════════════════════════════════
+          STYLES
+      ══════════════════════════════════════════════ */}
       <style>{`
-        .am{
-          --bg: #F4F1E9;
-          --navy: #111A24;
-          --navy-light: #1A2533;
-          --gold: #A87952;
-          --gold-light: #C9A45C;
-          --gold-gradient: linear-gradient(135deg, #B58D56, #8F613B);
-          --text: #4A4A4A;
+        /* ── TOKENS ── */
+        .am {
+          --navy:   #0D1520;
+          --navy2:  #162030;
+          --gold:   #A87952;
+          --goldL:  #C9A45C;
+          --goldG:  linear-gradient(135deg, #B58D56 0%, #8F613B 100%);
+          --bg:     #F4F1E9;
+          --bgW:    #FFFFFF;
+          --text:   #4A4A4A;
           --border: rgba(0,0,0,0.08);
 
-          position: relative;
           background: var(--bg);
-          padding: 56px 0 72px;
+          padding: 72px 0 88px;
+          overflow: hidden;
+          position: relative;
+        }
+
+        /* faint dot-grid background */
+        .am::before {
+          content: "";
+          position: absolute; inset: 0;
+          background-image:
+            radial-gradient(circle, rgba(168,121,82,0.10) 1px, transparent 1px);
+          background-size: 36px 36px;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .am__inner {
+          position: relative; z-index: 1;
+          max-width: 1280px;
+          margin: 0 auto;
+          padding: 0 clamp(1.25rem, 4vw, 3rem);
+          display: flex;
+          flex-direction: column;
+          gap: 52px;
+        }
+
+        /* ── SECTION HEADER ── */
+        .am__header { text-align: center; max-width: 720px; margin: 0 auto; }
+
+        .am__kicker {
+          display: inline-flex;
+          align-items: center;
+          gap: 14px;
+          margin-bottom: 20px;
+        }
+        .am__kLine { width: 40px; height: 1px; background: var(--gold); }
+        .am__kText {
+          font-family: 'Poppins', sans-serif;
+          font-size: 10px; font-weight: 800;
+          letter-spacing: .18em; text-transform: uppercase;
+          color: var(--gold);
+        }
+
+        .am__h2 {
+          font-family: 'Poppins', sans-serif;
+          font-size: clamp(32px, 4.2vw, 54px);
+          font-weight: 600; line-height: 1.08;
+          color: var(--navy); text-transform: uppercase; margin: 0;
+        }
+        .am__h3 {
+          font-family: 'Poppins', sans-serif;
+          font-size: clamp(34px, 4.6vw, 60px);
+          font-weight: 400; 
+          color: var(--gold); margin: -4px 0 0; line-height: 1.08;
+        }
+        .am__headerPara {
+          font-family: 'Poppins', sans-serif;
+          font-size: 15px; line-height: 1.85;
+          color: var(--text); margin: 16px auto 0;
+          max-width: 65ch;
+        }
+
+        /* ── TAB BAR ── */
+        .am__tabBar {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 10px;
+          background: var(--navy);
+          border-radius: 18px;
+          padding: 10px;
+        }
+
+        .am__tabBtn {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 16px 14px;
+          border-radius: 12px;
+          border: 1px solid transparent;
+          background: transparent;
+          cursor: pointer;
+          text-align: left;
+          transition: background .22s, border-color .22s;
+          position: relative;
           overflow: hidden;
         }
-
-        /* Decorative side text */
-        .am__side{
-          position:absolute;
-          top: 110px;
-          display:flex;
-          flex-direction:column;
-          gap:6px;
-          font-family:'Montserrat', sans-serif;
-          font-size:9px;
-          font-weight:700;
-          color: rgba(17,26,36,0.35);
-          user-select:none;
+        .am__tabBtn::before {
+          content: "";
+          position: absolute; inset: 0;
+          background: rgba(201,164,92,.08);
+          opacity: 0;
+          transition: opacity .22s;
+          border-radius: 11px;
         }
-        .am__side--left{ left: 40px; border-left:2px solid rgba(168,121,82,0.35); padding-left:12px; }
-        .am__side--right{ right: 40px; text-align:right; border-right:2px solid rgba(168,121,82,0.35); padding-right:12px; }
+        .am__tabBtn:hover::before { opacity: 1; }
 
-        .am__inner{
+        .am__tabBtn.is-active {
+          background: rgba(201,164,92,.14);
+          border-color: rgba(201,164,92,.40);
+        }
+
+        .am__tabBtnIco {
+          width: 40px; height: 40px;
+          border-radius: 10px;
+          background: rgba(255,255,255,.06);
+          border: 1px solid rgba(255,255,255,.10);
+          display: flex; align-items: center; justify-content: center;
+          color: rgba(255,255,255,.50);
+          flex-shrink: 0;
+          transition: background .22s, color .22s, border-color .22s;
+        }
+        .am__tabBtn.is-active .am__tabBtnIco {
+          background: var(--goldG);
+          border-color: transparent;
+          color: #fff;
+        }
+
+        .am__tabBtnLabels {
+          display: flex; flex-direction: column; gap: 2px;
+          flex: 1; min-width: 0;
+        }
+        .am__tabBtnLabel {
+          font-family: 'Poppins', sans-serif;
+          font-size: 11.5px; font-weight: 700;
+          color: rgba(255,255,255,.75);
+          line-height: 1.2;
+          transition: color .22s;
+        }
+        .am__tabBtn.is-active .am__tabBtnLabel { color: #fff; }
+
+        .am__tabBtnSub {
+          font-family: 'Poppins', sans-serif;
+          font-size: 11px;
+          color: rgba(255,255,255,.38);
+          transition: color .22s;
+        }
+        .am__tabBtn.is-active .am__tabBtnSub { color: rgba(201,164,92,.80); }
+
+        .am__tabBtnArrow {
+          color: rgba(255,255,255,.18);
+          flex-shrink: 0;
+          transition: color .22s, transform .22s;
+        }
+        .am__tabBtn.is-active .am__tabBtnArrow {
+          color: var(--goldL);
+          transform: rotate(90deg);
+        }
+
+        /* ── MAIN PANEL ── */
+        .am__panel {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+          gap: 0;
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 28px 72px rgba(0,0,0,0.14);
+          animation: amFadeIn .35s ease both;
+          height: 580px;
+        }
+        @keyframes amFadeIn {
+          from { opacity: 0; transform: translateY(12px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* LEFT — IMAGE SIDE */
+        .am__panelImg {
           position: relative;
-          z-index: 2;
-          max-width: 1240px;
-          margin: 0 auto;
-          padding: 0 24px;
+          overflow: hidden;
+          min-width: 0;
+        }
+        .am__panelImgEl {
+          position: absolute;
+          inset: 0;
+          width: 100%; height: 100%;
+          object-fit: cover; object-position: center;
+          display: block;
+          transition: transform .6s ease;
+        }
+        .am__panelImg:hover .am__panelImgEl { transform: scale(1.04); }
+
+        .am__panelImgGrad {
+          position: absolute; inset: 0;
+          background:
+            linear-gradient(135deg, rgba(13,21,32,0.55) 0%, transparent 55%),
+            linear-gradient(180deg, transparent 45%, rgba(13,21,32,0.72) 100%);
+          pointer-events: none;
         }
 
-        /* HERO */
-        .am__hero{ text-align:center; margin-bottom: 22px; }
-        .am__kicker{
-          display:inline-flex;
-          align-items:center;
-          gap:16px;
-          margin-bottom: 16px;
-        }
-        .am__kLine{ width: 44px; height: 1px; background: var(--gold); }
-        .am__kText{
-          font-family:'Montserrat', sans-serif;
-          font-size:10px;
-          font-weight:800;
-          letter-spacing: .12em;
-          text-transform:uppercase;
-          color: var(--gold);
-        }
-
-        .am__h2{
-          margin:0;
-          font-family:'Cormorant Garamond', serif;
-          font-size: clamp(34px, 4.6vw, 56px);
-          font-weight:600;
-          line-height:1.08;
-          color: var(--navy);
-          text-transform: uppercase;
-        }
-        .am__h3{
-          margin:-6px 0 0 0;
-          font-family:'Cormorant Garamond', serif;
-          font-weight:500;
-          color: var(--gold);
-          font-size: clamp(36px, 4.9vw, 62px);
-          line-height:1.08;
-        }
-        .am__para{
-          margin: 14px auto 0;
-          font-family:'DM Sans', sans-serif;
-          font-size: 15px;
-          line-height: 1.8;
-          color: var(--text);
-          max-width: 72ch;
-        }
-
-        /* Chips */
-        .am__chips{
-          margin-top: 22px;
-          display:flex;
-          flex-wrap:wrap;
-          justify-content:center;
-          gap: 10px;
-        }
-        .am__chip{
-          display:inline-flex;
-          align-items:center;
-          gap: 10px;
-          padding: 10px 12px;
+        .am__panelImgBadge {
+          position: absolute; top: 20px; left: 20px;
+          display: inline-flex; align-items: center; gap: 8px;
+          padding: 8px 14px;
           border-radius: 999px;
-          background: rgba(255,255,255,0.55);
-          border: 1px solid rgba(0,0,0,0.07);
-          font-family:'DM Sans', sans-serif;
-          font-size: 13.5px;
+          background: rgba(255,255,255,0.92);
+          backdrop-filter: blur(8px);
+          font-family: 'Poppins', sans-serif;
+          font-size: 10px; font-weight: 800; letter-spacing: .12em;
           color: var(--navy);
-        }
-        .am__chipIcoWrap{
-          width: 34px;
-          height: 34px;
-          border-radius: 999px;
-          border: 1px solid rgba(201,164,92,0.55);
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          color: var(--gold);
-          background: rgba(168,121,82,0.08);
+          box-shadow: 0 4px 16px rgba(0,0,0,0.12);
         }
 
-        /* CTA */
-        .am__cta{
-          margin-top: 22px;
-          display:flex;
+        .am__panelTagline {
+          position: absolute; bottom: 0; left: 0; right: 0;
+          padding: 20px 24px;
+          font-family: 'Poppins', sans-serif;
+          font-size: clamp(15px, 1.6vw, 19px);
+          
+          font-weight: 500;
+          color: rgba(255,255,255,0.90);
+          line-height: 1.4;
+          text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+        }
+
+        /* RIGHT — BODY SIDE */
+        .am__panelBody {
+          background: #fff;
+          padding: clamp(24px, 3vw, 40px) clamp(24px, 3vw, 40px);
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          min-width: 0;
+          overflow-y: auto;
+        }
+        
+        .am__panelBody::-webkit-scrollbar {
+          width: 6px;
+        }
+        .am__panelBody::-webkit-scrollbar-track {
+          background: rgba(0,0,0,0.02);
+        }
+        .am__panelBody::-webkit-scrollbar-thumb {
+          background: rgba(168,121,82,0.3);
+          border-radius: 10px;
+        }
+        .am__panelBody::-webkit-scrollbar-thumb:hover {
+          background: rgba(168,121,82,0.6);
+        }
+
+        .am__panelHead {
+          display: flex; align-items: flex-start; gap: 14px;
+        }
+        .am__panelHeadIco {
+          width: 48px; height: 48px;
+          border-radius: 14px;
+          background: rgba(168,121,82,0.10);
+          border: 1px solid rgba(168,121,82,0.24);
+          color: var(--gold);
+          display: flex; align-items: center; justify-content: center;
+          flex-shrink: 0;
+        }
+        .am__panelHeadSup {
+          font-family: 'Poppins', sans-serif;
+          font-size: 9px; font-weight: 800; letter-spacing: .16em;
+          color: var(--gold); text-transform: uppercase;
+          margin-bottom: 4px;
+        }
+        .am__panelHeadTitle {
+          font-family: 'Poppins', sans-serif;
+          font-size: clamp(26px, 2.8vw, 36px);
+          font-weight: 600; line-height: 1.05;
+          color: var(--navy);
+        }
+
+        .am__panelIntro {
+          font-family: 'Poppins', sans-serif;
+          font-size: 14.5px; line-height: 1.80;
+          color: #555;
+          border-left: 3px solid rgba(168,121,82,0.40);
+          padding-left: 14px;
+          margin: 0;
+        }
+
+        /* Feature grid */
+        .am__featGrid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
           gap: 12px;
-          justify-content:center;
-          flex-wrap:wrap;
         }
-        .am__btn{
-          display:inline-flex;
-          align-items:center;
-          justify-content:center;
-          padding: 14px 22px;
-          min-width: 190px;
+        .am__feat {
+          display: flex; align-items: flex-start; gap: 11px;
+          padding: 14px;
           border-radius: 12px;
-          text-decoration:none;
-          font-family:'Montserrat', sans-serif;
-          font-size: 10px;
-          font-weight: 800;
-          letter-spacing: .12em;
-          transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+          border: 1px solid var(--border);
+          background: rgba(244,241,233,0.50);
+          transition: background .2s, transform .2s, box-shadow .2s;
         }
-        .am__btn--gold{
-          background: var(--gold-gradient);
-          color:#fff;
-          box-shadow: 0 12px 26px rgba(143,97,59,0.18);
+        .am__feat:hover {
+          background: rgba(255,255,255,1);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(0,0,0,0.06);
         }
-        .am__btn--gold:hover{ transform: translateY(-1px); }
-        .am__btn--outline{
-          background: rgba(255,255,255,0.25);
+        .am__featIco {
+          width: 34px; height: 34px;
+          border-radius: 10px;
+          background: rgba(168,121,82,0.10);
+          border: 1px solid rgba(168,121,82,0.20);
+          display: flex; align-items: center; justify-content: center;
+          color: var(--gold); flex-shrink: 0;
+        }
+        .am__featCopy { display: flex; flex-direction: column; gap: 4px; }
+        .am__featTitle {
+          font-family: 'Poppins', sans-serif;
+          font-size: 10.5px; font-weight: 800; letter-spacing: .04em;
+          color: var(--navy);
+        }
+        .am__featText {
+          font-family: 'Poppins', sans-serif;
+          font-size: 12.5px; line-height: 1.55;
+          color: rgba(0,0,0,0.55);
+        }
+
+        /* Extra pills */
+        .am__extras {
+          display: flex; flex-wrap: wrap; gap: 8px;
+          padding-top: 12px;
+          border-top: 1px solid var(--border);
+        }
+        .am__pill {
+          display: inline-flex; align-items: center; gap: 7px;
+          padding: 7px 12px;
+          border-radius: 999px;
+          border: 1px solid rgba(0,0,0,0.09);
+          background: rgba(0,0,0,0.02);
+          font-family: 'Poppins', sans-serif;
+          font-size: 12.5px;
+          color: rgba(0,0,0,0.64);
+        }
+        .am__pillIco { color: var(--gold); }
+
+        /* CTA row */
+        .am__panelCta {
+          display: flex; gap: 10px; flex-wrap: wrap;
+          margin-top: auto;
+        }
+        .am__ctaBtn {
+          display: inline-flex; align-items: center; gap: 8px;
+          padding: 13px 22px;
+          border-radius: 10px;
+          font-family: 'Poppins', sans-serif;
+          font-size: 10px; font-weight: 800; letter-spacing: .12em;
+          text-decoration: none; white-space: nowrap;
+          transition: transform .2s, box-shadow .2s, background .2s;
+        }
+        .am__ctaBtn--gold {
+          background: var(--goldG); color: #fff;
+          box-shadow: 0 10px 24px rgba(143,97,59,0.22);
+        }
+        .am__ctaBtn--gold:hover { transform: translateY(-2px); box-shadow: 0 16px 32px rgba(143,97,59,0.28); }
+        .am__ctaBtn--ghost {
+          background: rgba(255,255,255,0.30);
           color: var(--navy);
           border: 1px solid rgba(17,26,36,0.18);
         }
-        .am__btn--outline:hover{ background: rgba(255,255,255,0.45); }
+        .am__ctaBtn--ghost:hover { background: rgba(255,255,255,0.70); }
 
-        /* Layout */
-        .am__layout{
-          margin-top: 18px;
-          display:grid;
-          grid-template-columns: 320px 1fr;
-          gap: 22px;
-          align-items: stretch;
-        }
-
-        /* Nav */
-        .am__navBox{
+        /* ── BOTTOM BAND ── */
+        .am__band {
+          position: relative;
+          border-radius: 18px;
+          overflow: hidden;
           background: var(--navy);
-          border-radius: 14px;
-          padding: 24px 18px;
-          display:flex;
-          flex-direction:column;
-          box-shadow: 0 20px 40px rgba(0,0,0,0.10);
-          overflow:hidden;
+          box-shadow: 0 24px 60px rgba(0,0,0,0.14);
         }
-        .am__navHead{ margin-bottom: 14px; padding: 0 10px; }
-        .am__navSup{
-          font-family:'Montserrat', sans-serif;
-          font-size: 9px;
-          font-weight: 800;
-          letter-spacing: .12em;
-          color: var(--gold-light);
-          margin-bottom: 10px;
+        .am__bandBg {
+          position: absolute; right: 0; top: 0; bottom: 0;
+          width: 45%; height: 100%;
+          object-fit: cover; object-position: center left;
+          opacity: 0.12;
+          mask-image: linear-gradient(to right, transparent, black 60%);
+          -webkit-mask-image: linear-gradient(to right, transparent, black 60%);
         }
-        .am__navTitle{
-          font-family:'Montserrat', sans-serif;
-          font-size: 20px;
-          font-weight: 600;
-          color:#fff;
+        .am__bandInner {
+          position: relative; z-index: 2;
+          display: flex; justify-content: space-between; align-items: center;
+          gap: 24px; flex-wrap: wrap;
+          padding: clamp(28px, 3vw, 40px) clamp(28px, 4vw, 52px);
         }
-        .am__navTitle span{ font-family:'Cormorant Garamond', serif; color: var(--gold-light); }
-
-        .am__navBody{ display:flex; flex-direction:column; gap: 8px; }
-        .am__navRow{
-          background: transparent;
-          border: 1px solid transparent;
-          border-bottom: 1px solid rgba(255,255,255,0.08);
-          padding: 14px 12px;
+        .am__bandLeft { flex: 1; min-width: 0; }
+        .am__bandSup {
+          font-family: 'Poppins', sans-serif;
+          font-size: 9px; font-weight: 800; letter-spacing: .18em;
+          color: var(--goldL); margin-bottom: 10px;
+        }
+        .am__bandTitle {
+          font-family: 'Poppins', sans-serif;
+          font-size: clamp(24px, 2.6vw, 34px);
+          font-weight: 600; line-height: 1.1;
+          color: #fff; margin-bottom: 10px;
+        }
+        .am__bandTitle span { color: var(--goldL); }
+        .am__bandSub {
+          font-family: 'Poppins', sans-serif;
+          font-size: 14px; line-height: 1.75;
+          color: rgba(255,255,255,0.65);
+          max-width: 66ch;
+        }
+        .am__bandBtn {
+          display: inline-flex; align-items: center;
+          padding: 16px 28px;
           border-radius: 12px;
-          display:flex;
-          align-items:center;
-          justify-content:space-between;
-          cursor:pointer;
-          transition: background .2s ease, border-color .2s ease;
+          background: var(--goldG);
+          color: #fff;
+          font-family: 'Poppins', sans-serif;
+          font-size: 10px; font-weight: 800; letter-spacing: .14em;
+          text-decoration: none; white-space: nowrap;
+          box-shadow: 0 12px 28px rgba(143,97,59,0.28);
+          transition: transform .2s, box-shadow .2s;
         }
-        .am__navRow:hover{ background: rgba(255,255,255,0.04); }
-        .am__navRow.isActive{
-          background: linear-gradient(90deg, rgba(201,164,92,0.16) 0%, transparent 100%);
-          border-color: rgba(201,164,92,0.38);
-        }
-        .am__navRowLeft{ display:flex; align-items:center; gap: 12px; }
-        .am__navRowIcon{ color: rgba(255,255,255,0.55); }
-        .am__navRow.isActive .am__navRowIcon{ color: var(--gold-light); }
-        .am__navRowLabel{
-          font-family:'DM Sans', sans-serif;
-          font-size: 14px;
-          color: rgba(255,255,255,0.78);
-        }
-        .am__navRow.isActive .am__navRowLabel{ color:#fff; }
-        .am__navRowArrow{ color: rgba(255,255,255,0.25); }
-        .am__navRow.isActive .am__navRowArrow{ color: var(--gold-light); }
+        .am__bandBtn:hover { transform: translateY(-2px); box-shadow: 0 18px 36px rgba(143,97,59,0.34); }
 
-        .am__navFooter{
-          margin-top:auto;
-          padding-top: 18px;
-          display:flex;
-          gap: 10px;
-          align-items:center;
-          opacity: .7;
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1100px) {
+          .am__tabBar { grid-template-columns: repeat(2, 1fr); }
         }
-        .am__navFooterLine{ flex:1; height:1px; background: rgba(255,255,255,0.18); }
-        .am__navFooterText{
-          font-family:'Montserrat', sans-serif;
-          font-size: 8px;
-          font-weight: 800;
-          letter-spacing: .12em;
-          color:#fff;
+        @media (max-width: 860px) {
+          .am__panel { grid-template-columns: 1fr; }
+          .am__panelImg { aspect-ratio: 16/9; min-height: 280px; }
+          .am__panelImgEl { height: 100%; }
+          .am__tabBar { grid-template-columns: repeat(2, 1fr); }
         }
-
-        /* ===== Panel: Balanced (image not over) ===== */
-        .am__panelBox{
-          background:#fff;
-          border-radius: 14px;
-          box-shadow: 0 20px 40px rgba(0,0,0,0.06);
-          overflow:hidden;
-
-          /* IMPORTANT: fixed height so image/content match */
-          height: 560px;
-
-          /* content + image */
-          display:grid;
-          grid-template-columns: 1fr minmax(280px, 420px); /* image width cap */
-        }
-
-        .am__panelContent{
-          padding: 26px 28px;
-          display:flex;
-          flex-direction:column;
-          overflow:auto; /* content zyada ho to scroll, layout break na ho */
-        }
-
-        .am__panelImg{
-          width: 100%;
-          height: 100%;
-          object-fit: cover;     /* no empty space */
-          object-position: center;
-          display:block;
-          background: var(--bg);
-        }
-
-        .am__panelHeadRow{
-          display:flex;
-          justify-content:space-between;
-          gap: 12px;
-          align-items:flex-start;
-          margin-bottom: 12px;
-        }
-        .am__panelSup{
-          font-family:'Montserrat', sans-serif;
-          font-size: 9px;
-          font-weight: 800;
-          letter-spacing: .12em;
-          color: var(--gold);
-          margin-bottom: 8px;
-        }
-        .am__panelTitle{
-          font-family:'Cormorant Garamond', serif;
-          font-size: 38px;
-          font-weight: 600;
-          line-height: 1.02;
-          color: var(--navy);
-        }
-        .am__panelHeadRight{
-          display:flex;
-          flex-direction:column;
-          align-items:flex-end;
-          gap: 4px;
-          font-family:'Montserrat', sans-serif;
-          font-size: 8px;
-          font-weight: 800;
-          letter-spacing: .12em;
-          color: rgba(17,26,36,0.30);
-        }
-
-        .am__intro{
-          margin: 0 0 14px 0;
-          font-family:'DM Sans', sans-serif;
-          font-size: 14px;
-          line-height: 1.6;
-          color: var(--text);
-          max-width: 58ch;
-        }
-
-        .am__featuresGrid{
-          display:grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 12px;
-          margin-bottom: 14px;
-        }
-        .am__feat{
-          border: 1px solid rgba(0,0,0,0.08);
-          border-radius: 14px;
-          padding: 12px;
-          display:flex;
-          gap: 10px;
-          background: #fff;
-        }
-        .am__featIconWrap{
-          width: 36px;
-          height: 36px;
-          background: rgba(168,121,82,0.10);
-          border-radius: 12px;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          color: var(--gold);
-          flex-shrink:0;
-        }
-        .am__featBody{ display:flex; flex-direction:column; gap: 4px; }
-        .am__featTitle{
-          font-family:'Montserrat', sans-serif;
-          font-size: 11px;
-          font-weight: 800;
-          color: var(--navy);
-        }
-        .am__featText{
-          font-family:'DM Sans', sans-serif;
-          font-size: 13px;
-          line-height: 1.45;
-          color: rgba(0,0,0,0.58);
-        }
-
-        .am__extras{
-          margin-top: auto;
-          padding-top: 14px;
-          border-top: 1px solid var(--border);
-          display:flex;
-          flex-wrap:wrap;
-          gap: 10px;
-        }
-        .am__pill{
-          display:inline-flex;
-          align-items:center;
-          gap: 8px;
-          padding: 8px 10px;
-          border-radius: 999px;
-          border: 1px solid rgba(0,0,0,0.10);
-          background: rgba(0,0,0,0.02);
-          font-family:'DM Sans', sans-serif;
-          font-size: 13px;
-          color: rgba(0,0,0,0.65);
-        }
-        .am__pillIco{ color: var(--gold); }
-
-        /* Bottom band */
-        .am__band{
-          margin-top: 22px;
-          background: var(--navy);
-          border-radius: 14px;
-          padding: 26px 28px;
-          display:flex;
-          justify-content:space-between;
-          align-items:center;
-          gap: 18px;
-          position:relative;
-          overflow:hidden;
-          box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-        }
-        .am__bandImg{
-          position:absolute;
-          right:0; top:0; bottom:0;
-          width: 42%;
-          object-fit: cover;
-          opacity: 0.13;
-          mask-image: linear-gradient(to right, transparent, black);
-          -webkit-mask-image: linear-gradient(to right, transparent, black);
-          z-index:1;
-        }
-        .am__bandContent{ position:relative; z-index:2; display:flex; gap: 16px; align-items:flex-start; }
-        .am__bandIcon{
-          width:48px; height:48px;
-          border-radius:999px;
-          background: rgba(255,255,255,0.06);
-          display:flex; align-items:center; justify-content:center;
-          flex-shrink:0;
-        }
-        .am__bandSup{
-          font-family:'Montserrat', sans-serif;
-          font-size: 9px;
-          font-weight: 800;
-          letter-spacing: .12em;
-          color: var(--gold);
-          margin-bottom: 8px;
-        }
-        .am__bandTitle{
-          font-family:'Cormorant Garamond', serif;
-          font-size: 30px;
-          font-weight: 600;
-          color:#fff;
-          line-height: 1.08;
-          margin-bottom: 6px;
-        }
-        .am__bandTitle span{ color: var(--gold-light); }
-        .am__bandSub{
-          font-family:'DM Sans', sans-serif;
-          font-size: 14px;
-          color: rgba(255,255,255,0.72);
-        }
-        .am__bandBtn{
-          position:relative; z-index:2;
-          background: var(--gold-gradient);
-          color:#fff;
-          padding: 14px 22px;
-          border-radius: 12px;
-          font-family:'Montserrat', sans-serif;
-          font-size: 10px;
-          font-weight: 800;
-          letter-spacing: .12em;
-          text-decoration:none;
-          white-space: nowrap;
-          transition: transform .2s ease;
-        }
-        .am__bandBtn:hover{ transform: translateY(-1px); }
-
-        /* Responsive */
-        @media (max-width: 1100px){
-          .am__side{ display:none; }
-          .am__layout{ grid-template-columns: 1fr; }
-          .am__panelBox{
-            height: auto;
-            grid-template-columns: 1fr;
-          }
-          .am__panelImg{
-            height: 260px;
-          }
-          .am__panelContent{
-            overflow: visible;
-          }
-        }
-        @media (max-width: 900px){
-          .am__featuresGrid{ grid-template-columns: 1fr; }
-          .am__band{ flex-direction: column; align-items:flex-start; }
+        @media (max-width: 600px) {
+          .am__featGrid { grid-template-columns: 1fr; }
+          .am__tabBar { grid-template-columns: 1fr; }
+          .am__tabBtnSub { display: none; }
+          .am__bandInner { flex-direction: column; align-items: flex-start; }
         }
       `}</style>
     </section>

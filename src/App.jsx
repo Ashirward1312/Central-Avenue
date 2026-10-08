@@ -1,6 +1,7 @@
 import Header from "./Header/Header";
 import Hero from "./Hero/Hero";
 import About from "./About/About";
+import Highlights from "./Highlights/Highlights";
 import Amenities from "./Aminities/Aminities";
 import Contact from "./Contact/Contact";
 import Footer from "./Footer/Footer";
@@ -11,6 +12,7 @@ function App() {
       <Header />
       <Hero />
       <About />
+      <Highlights />
       <Amenities />
       <Contact />
       <Footer />

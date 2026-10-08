@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
 const NAV = [
-  { label: "Home",      href: "#home" },
-  { label: "About",     href: "#about" },
-  { label: "Amenities", href: "#amenities" },
-  { label: "Contact",   href: "#contact" },
+  { label: "Home",       href: "#home" },
+  { label: "About",      href: "#about" },
+  { label: "Highlights", href: "#highlights" },
+  { label: "Amenities",  href: "#amenities" },
+  { label: "Contact",    href: "#contact" },
 ];
 
 export default function Header() {

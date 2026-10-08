@@ -2,19 +2,17 @@ import img1 from "../Images/1.jpg";
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 
 const FEATURES = [
-  "Premium retail spaces across multiple floors",
-  "High-visibility showroom units",
-  "Contemporary office suites with modern amenities",
-  "Dedicated parking & easy accessibility",
-  "CCTV surveillance & 24/7 security",
-  "High-footfall prime commercial location",
+  "Premium retail & dining spaces",
+  "Modern corporate office suites",
+  "Ample multi-level parking",
+  "Ready for possession today",
 ];
 
 const STATS = [
   { num: "3+",   label: "Lakh Sq. Ft.",   sub: "Total built-up area" },
   { num: "200+", label: "Business Units",  sub: "Retail, showroom & office" },
   { num: "01",   label: "Prime Address",   sub: "Kamal Vihar, Raipur" },
-  { num: "2025", label: "Delivery Year",   sub: "Ready for possession" },
+  { num: "Now",  label: "Possession Ready",sub: "Move in immediately" },
 ];
 
 export default function About() {
@@ -44,16 +42,7 @@ export default function About() {
               </h2>
 
               <p className="about__para">
-                Central Avenue is a modern commercial address in Kamal Vihar, Raipur —
-                thoughtfully planned for retail, showrooms and offices. With a clean layout
-                and contemporary design, it gives brands the right space to stand out and
-                businesses the environment to grow.
-              </p>
-
-              <p className="about__para" style={{ marginTop: "1rem" }}>
-                Strategically located on one of Raipur's busiest commercial corridors,
-                Central Avenue brings together design, convenience and commerce in one
-                well-connected destination.
+                Central Avenue is Kamal Vihar's most prestigious commercial address. Thoughtfully designed for retail boutiques, food joints, premium showrooms, and corporate offices — it is the destination where top brands choose to be.
               </p>
 
               {/* Feature checklist */}
@@ -84,7 +73,7 @@ export default function About() {
               />
               <div className="about__img-tint" />
               <div className="about__badge">
-                <div className="about__badge-title">Prime Commercial Destination</div>
+                <div className="about__badge-title">✦ Possession Ready — Move In Today</div>
                 <div className="about__badge-sub">Kamal Vihar, Raipur, Chhattisgarh</div>
               </div>
             </div>
