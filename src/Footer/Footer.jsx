@@ -1,4 +1,4 @@
-import { FaInstagram, FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
+import { FaInstagram, FaFacebookF, FaTwitter } from "react-icons/fa";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 const NAV = [
@@ -10,10 +10,9 @@ const NAV = [
 ];
 
 const SOCIALS = [
-  { label: "Instagram", href: "https://instagram.com/", Icon: FaInstagram },
-  { label: "Facebook", href: "https://facebook.com/", Icon: FaFacebookF },
-  { label: "LinkedIn", href: "https://linkedin.com/", Icon: FaLinkedinIn },
-  { label: "YouTube", href: "https://youtube.com/", Icon: FaYoutube },
+  { label: "Instagram", href: "https://www.instagram.com/maheshventuresrpr/", Icon: FaInstagram },
+  { label: "Facebook", href: "https://www.facebook.com/Maheshventures/", Icon: FaFacebookF },
+  { label: "Twitter", href: "https://x.com/maheshwari95189", Icon: FaTwitter },
 ];
 
 export default function Footer() {
@@ -76,18 +75,24 @@ export default function Footer() {
           <div className="ft__col">
             <div className="ft__colTitle">Contact Us</div>
             <div className="ft__contact">
-              <a href="mailto:mventures011@gmail.com" className="ft__contactRow">
-                <Mail size={14} strokeWidth={1.6} className="ft__contactIco" />
-                <span>mventures011@gmail.com</span>
-              </a>
-              <a href="tel:+918871090476" className="ft__contactRow">
-                <Phone size={14} strokeWidth={1.6} className="ft__contactIco" />
-                <span>+91 88710 90476</span>
-              </a>
               <div className="ft__contactRow">
+                <Mail size={14} strokeWidth={1.6} className="ft__contactIco" style={{ flexShrink: 0, marginTop: "4px" }} />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <a href="mailto:mventures011@gmail.com" className="ft__contactLink">mventures011@gmail.com</a>
+                  <a href="mailto:Centralavenue637@gmail.com" className="ft__contactLink">Centralavenue637@gmail.com</a>
+                </div>
+              </div>
+              <div className="ft__contactRow">
+                <Phone size={14} strokeWidth={1.6} className="ft__contactIco" style={{ flexShrink: 0, marginTop: "4px" }} />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <a href="tel:+917777889762" className="ft__contactLink">+91 77778 89762</a>
+                  <a href="tel:+918720001111" className="ft__contactLink">+91 87200 01111</a>
+                </div>
+              </div>
+              <a href="https://maps.google.com/?q=L.K+Corporate+And+Logistic+Park,+Kurru,+3rd+Floor,+Near+Kamal+Vihar,+Raipur" target="_blank" rel="noreferrer" className="ft__contactRow ft__contactLink" style={{ textDecoration: 'none' }}>
                 <MapPin size={14} strokeWidth={1.6} className="ft__contactIco" style={{ flexShrink: 0, marginTop: "2px" }} />
                 <span>L.K Corporate And Logistic Park, Kurru, 3rd Floor, Near Kamal Vihar, Raipur (C.G)</span>
-              </div>
+              </a>
             </div>
           </div>
 
@@ -279,11 +284,14 @@ export default function Footer() {
           font-family: 'Poppins', sans-serif;
           font-size: 13.5px;
           color: rgba(255,255,255,0.60);
-          text-decoration: none;
-          transition: color .18s;
           line-height: 1.6;
         }
-        a.ft__contactRow:hover { color: #C9A45C; }
+        .ft__contactLink {
+          color: inherit;
+          text-decoration: none;
+          transition: color .18s;
+        }
+        .ft__contactLink:hover, a.ft__contactRow:hover { color: #C9A45C; }
         .ft__contactIco {
           color: #C9A45C;
           margin-top: 2px;

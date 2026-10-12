@@ -10,14 +10,17 @@ import {
   MessageCircle,
   ArrowUpRight,
 } from "lucide-react";
-import { FaInstagram, FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
+import { FaInstagram, FaFacebookF, FaTwitter } from "react-icons/fa";
 
 const CONTACT = {
-  email: "mventures011@gmail.com",
-  phoneText: "+91 88710 90476",
-  phoneHref: "+918871090476",
+  email1: "mventures011@gmail.com",
+  email2: "Centralavenue637@gmail.com",
+  phoneText1: "+91 77778 89762",
+  phoneText2: "+91 87200 01111",
+  phoneHref1: "+917777889762",
+  phoneHref2: "+918720001111",
   whatsappHref:
-    "https://wa.me/918871090476?text=Hi%2C%20I%20want%20details%20for%20commercial%20spaces.",
+    "https://wa.me/918720001111?text=Hi%2C%20I%20want%20details%20for%20commercial%20spaces.",
   address:
     "L.K Corporate And Logistic Park, Kurru, 3rd Floor, Near Kamal Vihar, Raipur (C.G)",
   hours: "Mon – Sat : 9:30 AM – 6:30 PM",
@@ -26,10 +29,9 @@ const CONTACT = {
 };
 
 const SOCIALS = [
-  { label: "Instagram", href: "https://instagram.com/", Icon: FaInstagram },
-  { label: "Facebook", href: "https://facebook.com/", Icon: FaFacebookF },
-  { label: "LinkedIn", href: "https://linkedin.com/", Icon: FaLinkedinIn },
-  { label: "YouTube", href: "https://youtube.com/", Icon: FaYoutube },
+  { label: "Instagram", href: "https://www.instagram.com/maheshventuresrpr/", Icon: FaInstagram },
+  { label: "Facebook", href: "https://www.facebook.com/Maheshventures/", Icon: FaFacebookF },
+  { label: "Twitter", href: "https://x.com/maheshwari95189", Icon: FaTwitter },
 ];
 
 export default function Contact() {
@@ -91,7 +93,8 @@ export default function Contact() {
                   <Phone className="cp__infoIco" size={20} />
                   <div className="cp__infoTextWrap">
                     <span className="cp__infoLabel">Phone</span>
-                    <a href={`tel:${CONTACT.phoneHref}`} className="cp__infoLink">{CONTACT.phoneText}</a>
+                    <a href={`tel:${CONTACT.phoneHref1}`} className="cp__infoLink">{CONTACT.phoneText1}</a>
+                    <a href={`tel:${CONTACT.phoneHref2}`} className="cp__infoLink">{CONTACT.phoneText2}</a>
                   </div>
                 </div>
 
@@ -99,7 +102,8 @@ export default function Contact() {
                   <Mail className="cp__infoIco" size={20} />
                   <div className="cp__infoTextWrap">
                     <span className="cp__infoLabel">Email</span>
-                    <a href={`mailto:${CONTACT.email}`} className="cp__infoLink">{CONTACT.email}</a>
+                    <a href={`mailto:${CONTACT.email1}`} className="cp__infoLink">{CONTACT.email1}</a>
+                    <a href={`mailto:${CONTACT.email2}`} className="cp__infoLink">{CONTACT.email2}</a>
                   </div>
                 </div>
 
@@ -255,7 +259,7 @@ export default function Contact() {
           --border: #E2E8F0;
 
           background-color: var(--bg);
-          padding: 100px 0;
+          padding: 140px 0 100px;
           font-family: 'Poppins', sans-serif;
           position: relative;
           overflow: hidden;
@@ -291,7 +295,7 @@ export default function Contact() {
         }
 
         .cp__h2 {
-          font-size: clamp(32px, 4vw, 48px);
+          font-size: clamp(36px, 4.5vw, 56px);
           font-weight: 700;
           color: var(--navy);
           line-height: 1.1;

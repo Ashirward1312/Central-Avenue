@@ -2,6 +2,7 @@ import imgFood from "../Images/food.jpg";
 import imgTarget from "../Images/Target.jpg";
 import imgParking from "../Images/parking.jpg";
 import imgMost from "../Images/most.jpg";
+import imgLocation from "../Images/1.jpg";
 import {
   UtensilsCrossed,
   Dumbbell,
@@ -42,7 +43,7 @@ const TARGETS = [
 /* ── Food Joint Chain Highlights ── */
 const FOOD_FEATURES = [
   "Multiple food joint chains & restaurants",
-  "Café & quick-service restaurant spaces",
+  "Cafe & quick-service restaurant spaces",
   "Dedicated outdoor dining areas",
   "High-footfall food court environment",
   "Ideal for national & regional F&B brands",
@@ -59,6 +60,48 @@ export default function Highlights() {
           <span className="hl__badgeLine" />
           <span className="hl__badgeText">WHY CENTRAL AVENUE</span>
           <span className="hl__badgeLine" />
+        </div>
+
+        {/* ═══════════════════════════════════════════
+            BLOCK 0 — LOCATION ADVANTAGE
+        ═══════════════════════════════════════════ */}
+        <div className="hl__block hl__block--imageRight hl__block--dark">
+          <div className="hl__content hl__content--light">
+            <div className="hl__kicker hl__kicker--gold">
+              <MapPin size={16} strokeWidth={1.5} className="hl__kickerIco" />
+              <span>LOCATION ADVANTAGE</span>
+            </div>
+            <h2 className="hl__h2 hl__h2--light">
+              Premium Connectivity at <span>CENTRAL AVENUE</span>
+            </h2>
+            <p className="hl__para hl__para--light">
+              Located on the Main Road at Kamal Vihar Entrance, Deopuri, Raipur. Central Avenue offers unparalleled access and visibility for your business, surrounded by premium commercial and residential hubs.
+            </p>
+            <ul className="hl__list">
+              {[
+                "Kamal Vihar",
+                "Deopuri",
+                "Main Road connectivity",
+                "Shubham K Mart",
+                "CBD/Commercial zones",
+                "Residential catchment",
+                "Easy access to major roads"
+              ].map((loc) => (
+                <li key={loc} className="hl__listItem" style={{ color: "#e2e8f0" }}>
+                  <CheckCircle2 size={15} strokeWidth={1.8} className="hl__listIco" />
+                  <span>{loc}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="hl__imgWrap">
+            <img src={imgLocation} alt="Location Advantage - Central Avenue" className="hl__img" loading="lazy" />
+            <div className="hl__imgOverlay hl__imgOverlay--dark" />
+            <div className="hl__imgChip hl__imgChip--gold">
+              <MapPin size={14} strokeWidth={1.5} />
+              <span>Prime Location</span>
+            </div>
+          </div>
         </div>
 
         {/* ═══════════════════════════════════════════
@@ -82,7 +125,7 @@ export default function Highlights() {
               A Thriving <span>Food Court</span> &amp; Dining Destination
             </h2>
             <p className="hl__para">
-              Central Avenue is home to a curated selection of food joints, restaurant chains and cafés — making it one of Kamal Vihar's most sought-after dining addresses. Whether you are a QSR brand, a casual dining chain or a specialty café, this is where your business finds the right audience.
+              Central Avenue is home to a curated selection of food joints, restaurant chains and cafes — making it one of Kamal Vihar's most sought-after dining addresses. Whether you are a QSR brand, a casual dining chain or a specialty cafe, this is where your business finds the right audience.
             </p>
             <ul className="hl__list">
               {FOOD_FEATURES.map((f) => (
@@ -248,7 +291,7 @@ export default function Highlights() {
         .hl__badgeLine { flex: 0 0 48px; height: 1px; background: #A87952; }
         .hl__badgeText {
           font-family: 'Poppins', sans-serif;
-          font-size: 10px;
+          font-size: 14px;
           font-weight: 800;
           letter-spacing: .18em;
           color: #A87952;
@@ -353,7 +396,7 @@ export default function Highlights() {
         /* ─── HEADINGS ─── */
         .hl__h2 {
           font-family: 'Poppins', sans-serif;
-          font-size: clamp(28px, 3.2vw, 44px);
+          font-size: clamp(34px, 4vw, 52px);
           font-weight: 600;
           line-height: 1.1;
           color: #111A24;

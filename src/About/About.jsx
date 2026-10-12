@@ -1,5 +1,6 @@
 import img1 from "../Images/1.jpg";
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const FEATURES = [
   "Premium retail & dining spaces",
@@ -9,8 +10,8 @@ const FEATURES = [
 ];
 
 const STATS = [
-  { num: "3+",   label: "Lakh Sq. Ft.",   sub: "Total built-up area" },
-  { num: "200+", label: "Business Units",  sub: "Retail, showroom & office" },
+  { num: "7,470", label: "sq. m. Combined Built-up Area", sub: "Total built-up area" },
+  { num: "159", label: "Business Units",  sub: "Retail, showroom & office" },
   { num: "01",   label: "Prime Address",   sub: "Kamal Vihar, Raipur" },
   { num: "Now",  label: "Possession Ready",sub: "Move in immediately" },
 ];
@@ -57,9 +58,9 @@ export default function About() {
 
               {/* CTA */}
               <div className="about__cta-wrap">
-                <a href="#contact" className="about__cta">
+                <Link to="/contact" className="about__cta">
                   Know More <ArrowUpRight size={14} />
-                </a>
+                </Link>
               </div>
             </div>
 

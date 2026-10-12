@@ -1,5 +1,6 @@
-import img1 from "../Images/Park.PNG";
+import img1 from "../Images/Hero.png";
 import { ArrowDown, ArrowUpRight, MapPin, ShoppingBag, Building2, Monitor, Landmark } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const STATS = [
   { Icon: ShoppingBag,  label: "Retail & Shops",    sub: "Ground & upper floor units" },
@@ -33,7 +34,7 @@ export default function Hero() {
               {/* H1 */}
               <h1 className="hero__h1">
                 Central
-                <span className="hero__h1-accent">Avenue</span>
+                <span className="hero__h1-accent">AVENUE</span>
               </h1>
 
               {/* Tagline */}
@@ -52,12 +53,12 @@ export default function Hero() {
 
               {/* Buttons */}
               <div className="hero__buttons">
-                <a href="#about" className="hero__btn-main">
+                <Link to="/about" className="hero__btn-main">
                   Explore the Project <ArrowUpRight size={15} />
-                </a>
-                <a href="#contact" className="hero__btn-ghost">
+                </Link>
+                <Link to="/contact" className="hero__btn-ghost">
                   Enquire Now <ArrowDown size={14} />
-                </a>
+                </Link>
               </div>
 
             </div>
