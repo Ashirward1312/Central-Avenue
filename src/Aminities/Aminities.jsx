@@ -1,8 +1,8 @@
 import { useState } from "react";
-import imgBuilding from "../Images/hh.png";
+import imgBuilding from "../Images/hero2.jpg";
 import imgParking  from "../Images/parking.jpg";
-import imgFood     from "../Images/food.jpg";
-import imgTarget   from "../Images/Target.jpg";
+import imgFood     from "../Images/foodcourt.jpg";
+import imgTarget   from "../Images/office.jpg";
 
 import {
   ShieldCheck,
@@ -339,7 +339,7 @@ export default function Amenities() {
           --border: rgba(0,0,0,0.08);
 
           background: var(--bg);
-          padding: 72px 0 88px;
+          padding: clamp(124px, 13vw, 148px) 0 96px;
           overflow: hidden;
           position: relative;
         }
@@ -760,6 +760,7 @@ export default function Amenities() {
           .am__tabBar { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 600px) {
+          .am { padding: 110px 0 70px; }
           .am__featGrid { grid-template-columns: 1fr; }
           .am__tabBar { grid-template-columns: 1fr; }
           .am__tabBtnSub { display: none; }

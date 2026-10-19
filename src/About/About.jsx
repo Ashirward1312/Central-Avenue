@@ -1,4 +1,4 @@
-import img1 from "../Images/1.jpg";
+import img1 from "../Images/office.jpg";
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 

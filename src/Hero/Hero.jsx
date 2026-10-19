@@ -1,83 +1,112 @@
-import img1 from "../Images/Hero.png";
-import { ArrowDown, ArrowUpRight, MapPin, ShoppingBag, Building2, Monitor, Landmark } from "lucide-react";
+import "./Hero.css";
+import img1 from "../Images/hero7.png";
+
+import {
+  ShoppingBag,
+  Building2,
+  Monitor,
+  Landmark,
+  ArrowUpRight,
+  MessageCircle,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
 const STATS = [
-  { Icon: ShoppingBag,  label: "Retail & Shops",    sub: "Ground & upper floor units" },
-  { Icon: Building2,    label: "Office Spaces",      sub: "Contemporary suites" },
-  { Icon: Monitor,      label: "Food & Dining",      sub: "Restaurants & cafés" },
-  { Icon: Landmark,     label: "Possession Ready",   sub: "Move in immediately" },
+  { Icon: ShoppingBag, label: "Retail & Shops", sub: "Premium Retail" },
+  { Icon: Building2, label: "Office Spaces", sub: "Modern Workspaces" },
+  { Icon: Monitor, label: "Food & Dining", sub: "Cafés & Restaurants" },
+  { Icon: Landmark, label: "Ready to Move", sub: "Commercial Spaces" },
 ];
 
 export default function Hero() {
   return (
     <>
-      {/* ══════════════════════════════
-          HERO
-      ══════════════════════════════ */}
       <section id="home" className="hero">
-        <img src={img1} alt="Central Avenue – Premium Commercial Destination" className="hero__bg" />
-        <div className="hero__overlay" />
-        <div className="hero__gradient-left" />
-        <div className="hero__gradient-bottom" />
+        <img
+          src={img1}
+          alt="Central Avenue — Premium Commercial Destination, Kamal Vihar, Raipur"
+          className="hero__bg"
+          fetchPriority="high"
+          decoding="async"
+        />
+
+        {/* overlays */}
+        <div className="hero__overlay" aria-hidden="true" />
+        <div className="hero__ambient" aria-hidden="true" />
+        <div className="hero__vignette" aria-hidden="true" />
+        <div className="hero__grain" aria-hidden="true" />
 
         <div className="hero__content">
-          <div className="hero__inner">
-            <div className="hero__text">
+          {/* glass plate for premium look */}
+          <div className="hero__plate" aria-hidden="true" />
 
-              {/* Kicker */}
-              <div className="hero__kicker">
-                <span className="hero__kicker-line" />
-                <span className="hero__kicker-text">A Premium Commercial Destination</span>
-              </div>
+          <div className="hero__text">
+            <div className="hero__kicker">
+              <span className="hero__kicker-line" />
+              <span className="hero__kicker-text">Premium Commercial Spaces</span>
+              <span className="hero__kicker-line" />
+            </div>
 
-              {/* H1 */}
-              <h1 className="hero__h1">
-                Central
-                <span className="hero__h1-accent">AVENUE</span>
-              </h1>
+            <h1 className="hero__h1">
+              Central <span className="hero__h1-gold">Avenue</span>
+            </h1>
 
-              {/* Tagline */}
-              <p className="hero__tagline">Where Business Meets Opportunity.</p>
+            <div className="hero__heading-accent" aria-hidden="true">
+              <span />
+            </div>
 
-              {/* Description */}
-              <p className="hero__desc">
-                Kamal Vihar's most vibrant commercial landmark — home to leading food joints, premium retail shops, corporate offices, salons and fitness studios. A destination where businesses prosper and customers keep coming back.
-              </p>
+            <p className="hero__tagline">Where Business Meets Opportunity.</p>
 
-              {/* Location */}
-              <div className="hero__location">
-                <MapPin size={15} strokeWidth={1.5} className="hero__location-icon" />
-                <span className="hero__location-text">Kamal Vihar · Raipur, Chhattisgarh</span>
-              </div>
+            {/* <p className="hero__description">
+              Discover thoughtfully designed commercial spaces where modern
+              business, premium retail and opportunity come together.
+            </p> */}
 
-              {/* Buttons */}
-              <div className="hero__buttons">
-                <Link to="/about" className="hero__btn-main">
-                  Explore the Project <ArrowUpRight size={15} />
-                </Link>
-                <Link to="/contact" className="hero__btn-ghost">
-                  Enquire Now <ArrowDown size={14} />
-                </Link>
-              </div>
+            <div className="hero__actions">
+              <Link to="/about" className="hero__btn hero__btn--primary">
+                <span className="hero__btn-text">Explore Project</span>
+                <ArrowUpRight size={18} strokeWidth={1.9} aria-hidden="true" />
+                <span className="hero__btn-shine" aria-hidden="true" />
+              </Link>
 
+              <Link to="/contact" className="hero__btn hero__btn--secondary">
+                <MessageCircle size={18} strokeWidth={1.8} aria-hidden="true" />
+                <span className="hero__btn-text">Enquire Now</span>
+                <span className="hero__btn-shine" aria-hidden="true" />
+              </Link>
+            </div>
+
+            <div className="hero__location">
+              <span className="hero__location-dot" />
+              <span>Kamal Vihar, Raipur, Chhattisgarh</span>
             </div>
           </div>
         </div>
+
+        <div className="hero__bottom-line" aria-hidden="true" />
       </section>
 
-      {/* ══════════════════════════════
-          STATS STRIP
-      ══════════════════════════════ */}
       <section className="hero__stats">
-        <div className="hero__stats-grid">
-          {STATS.map(({ Icon, label, sub }) => (
-            <div key={label} className="hero__stat">
-              <Icon size={26} strokeWidth={1.2} className="hero__stat-icon" />
-              <p className="hero__stat-label">{label}</p>
-              <p className="hero__stat-sub">{sub}</p>
-            </div>
-          ))}
+        <div className="hero__stats-inner">
+          <div className="hero__stats-grid">
+            {STATS.map(({ Icon, label, sub }) => (
+              <div key={label} className="hero__stat">
+                <div className="hero__stat-icon-wrap">
+                  <Icon
+                    size={22}
+                    strokeWidth={1.6}
+                    className="hero__stat-icon"
+                    aria-hidden="true"
+                  />
+                </div>
+
+                <div className="hero__stat-content">
+                  <p className="hero__stat-label">{label}</p>
+                  <p className="hero__stat-sub">{sub}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </>

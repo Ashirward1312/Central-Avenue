@@ -1,0 +1,580 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ==========================================
+   CENTRAL AVENUE — LUXURY HERO SECTION
+========================================== */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: 100svh;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #0b0f14;
+}
+
+/* Background Image */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -4;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.02);
+  filter: saturate(1.02) contrast(1.02);
+}
+
+/* Main Overlay (balanced cinematic - lightened) */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(11, 15, 20, 0.12) 0%,
+      rgba(11, 15, 20, 0.06) 40%,
+      rgba(11, 15, 20, 0.30) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(11, 15, 20, 0.24) 0%,
+      rgba(11, 15, 20, 0.05) 45%,
+      rgba(11, 15, 20, 0.18) 100%
+    );
+}
+
+/* 7) Subtle animated glow (very slow 10s pulse) */
+@keyframes softGlow {
+  0%, 100% { opacity: 0.10; }
+  50% { opacity: 0.18; }
+}
+
+.hero__ambient {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(11, 15, 20, 0.06) 0%,
+      rgba(11, 15, 20, 0.02) 42%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse at 50% 72%,
+      rgba(201, 164, 92, 0.16) 0%,
+      transparent 56%
+    );
+  animation: softGlow 10s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__ambient {
+    animation: none;
+  }
+}
+
+/* 5) Subtle grain + smooth soft vignette */
+.hero__grain {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+.hero__vignette {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  box-shadow: inset 0 0 240px rgba(0, 0, 0, 0.30);
+}
+
+/* Centered Content */
+.hero__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1320px;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: 120px 32px 90px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* 3) Hero text behind "micro-contrast" (without blur) */
+.hero__plate {
+  position: absolute;
+  inset: 40px 18px;
+  max-width: 1040px;
+  margin: 0 auto;
+  border-radius: 28px;
+  z-index: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    180deg,
+    rgba(11, 15, 20, 0.24),
+    rgba(11, 15, 20, 0.12),
+    rgba(11, 15, 20, 0.26)
+  );
+  border: 1px solid rgba(201, 164, 92, 0.14);
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Text Wrapper */
+.hero__text {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 16px 12px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 6) Kicker — Capsule badge */
+.hero__kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.hero__kicker-line {
+  display: block;
+  width: 48px;
+  height: 1px;
+  flex-shrink: 0;
+  background: linear-gradient(90deg, transparent, rgba(201, 164, 92, 0.85));
+}
+.hero__kicker-line:last-child { transform: rotate(180deg); }
+
+.hero__kicker-text {
+  font-family: "Inter", "Poppins", system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  line-height: 1.6;
+  text-transform: uppercase;
+  color: rgba(232, 212, 173, 0.95);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65);
+
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(11, 15, 20, 0.35);
+  border: 1px solid rgba(201, 164, 92, 0.18);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* 1) Luxury Typography Heading (Playfair Display) */
+.hero__h1 {
+  margin: 0;
+  max-width: 100%;
+
+  font-family: "Playfair Display", "Georgia", serif;
+  font-size: clamp(52px, 7.6vw, 104px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-align: center;
+
+  color: #fffaf1;
+  text-shadow: 0 18px 64px rgba(0, 0, 0, 0.55);
+}
+
+/* 2) Metallic Gold Gradient + Subtle Highlight */
+.hero__h1-gold {
+  display: inline;
+  font-weight: 800;
+
+  background: linear-gradient(
+    115deg,
+    #b8893f 0%,
+    #fff2cf 38%,
+    #d2a85f 65%,
+    #9c6b2c 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.30));
+}
+
+/* Heading Accent */
+.hero__heading-accent {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 22px;
+}
+
+.hero__heading-accent span {
+  position: relative;
+  display: block;
+  width: 86px;
+  height: 1px;
+
+  background: linear-gradient(90deg, transparent, #c9a45c, transparent);
+}
+
+.hero__heading-accent span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  width: 5px;
+  height: 5px;
+
+  border: 1px solid #e8d4ad;
+  background: #c9a45c;
+
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* 1) Tagline & Description in Inter / Poppins */
+.hero__tagline {
+  max-width: 760px;
+  margin: 24px 0 0;
+
+  font-family: "Inter", "Poppins", system-ui, sans-serif;
+  font-size: clamp(18px, 2.1vw, 28px);
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: 0.015em;
+
+  color: #f3e8d5;
+  text-shadow: 0 3px 16px rgba(0, 0, 0, 0.60);
+}
+
+.hero__description {
+  max-width: 640px;
+  margin: 14px 0 0;
+
+  font-family: "Inter", "Poppins", system-ui, sans-serif;
+  font-size: 13.5px;
+  font-weight: 400;
+  line-height: 1.9;
+  letter-spacing: 0.015em;
+
+  color: rgba(255, 250, 241, 0.82);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.50);
+}
+
+/* CTA Group */
+.hero__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+
+  margin-top: 34px;
+}
+
+/* 4) Premium Buttons (radius 16px + shine + depth + border) */
+.hero__btn {
+  position: relative;
+  overflow: hidden;
+  min-height: 54px;
+  padding: 0 28px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  border-radius: 16px;
+
+  font-family: "Inter", "Poppins", system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  line-height: 1.4;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Primary Button */
+.hero__btn--primary {
+  color: #17140e;
+  background: linear-gradient(110deg, #c9a45c, #f0d9a8, #c9a45c);
+  border: 1px solid rgba(232, 212, 173, 0.55);
+  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.hero__btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 32px 100px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  background: #f2dfb9;
+}
+
+/* Secondary Button */
+.hero__btn--secondary {
+  color: #fffaf1;
+  background: rgba(11, 15, 20, 0.38);
+  border: 1px solid rgba(232, 212, 173, 0.55);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.hero__btn--secondary:hover {
+  transform: translateY(-2px);
+  background: rgba(11, 15, 20, 0.62);
+  border-color: rgba(232, 212, 173, 0.85);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.40);
+}
+
+/* Button Shine Sweep */
+.hero__btn-shine {
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.36),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
+}
+
+.hero__btn:hover .hero__btn-shine {
+  left: 150%;
+}
+
+/* Focus */
+.hero__btn:focus-visible {
+  outline: 2px solid #e8d4ad;
+  outline-offset: 4px;
+}
+
+/* Location */
+.hero__location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  margin-top: 30px;
+
+  font-family: "Inter", "Poppins", system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+
+  color: rgba(255, 250, 241, 0.82);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.60);
+}
+
+.hero__location-dot {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+
+  border-radius: 50%;
+  background: #c9a45c;
+
+  box-shadow: 0 0 14px rgba(201, 164, 92, 0.55);
+}
+
+/* Bottom Gold Line */
+.hero__bottom-line {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 164, 92, 0.62),
+    transparent
+  );
+}
+
+/* ==========================================
+   STATS STRIP
+========================================== */
+
+.hero__stats {
+  background: #0b0f14;
+  border-top: 1px solid rgba(201, 164, 92, 0.20);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.hero__stats-inner {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+.hero__stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.hero__stat {
+  padding: 28px 14px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background-color 0.22s ease;
+}
+
+.hero__stat:last-child { border-right: none; }
+
+.hero__stat:hover { background: rgba(201, 164, 92, 0.06); }
+
+.hero__stat-icon-wrap {
+  width: 46px;
+  height: 46px;
+  margin-bottom: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(201, 164, 92, 0.22);
+  border-radius: 50%;
+
+  background: rgba(201, 164, 92, 0.06);
+}
+
+.hero__stat-icon { color: rgba(215, 183, 118, 0.95); }
+
+.hero__stat-label {
+  margin: 0 0 6px;
+
+  font-family: "Inter", "Poppins", system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.7;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: rgba(245, 241, 235, 0.96);
+}
+
+.hero__stat-sub {
+  margin: 0;
+
+  font-family: "Inter", "Poppins", system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.65;
+
+  color: rgba(169, 166, 159, 0.95);
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .hero__content { padding: 112px 22px 78px; }
+  .hero__plate { inset: 32px 14px; border-radius: 24px; }
+  .hero__stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hero__stat:nth-child(2) { border-right: none; }
+  .hero__stat:nth-child(-n + 2) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .hero__content {
+    min-height: 100svh;
+    padding: 98px 16px 66px;
+  }
+
+  .hero__plate {
+    inset: 20px 8px;
+    border-radius: 20px;
+  }
+
+  .hero__kicker { gap: 10px; margin-bottom: 22px; }
+  .hero__kicker-line { width: 22px; }
+
+  .hero__kicker-text {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    padding: 8px 14px;
+  }
+
+  .hero__actions { width: 100%; gap: 10px; margin-top: 26px; }
+
+  .hero__btn {
+    min-height: 50px;
+    padding: 0 18px;
+    gap: 10px;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+  }
+
+  .hero__location { margin-top: 24px; font-size: 9.5px; letter-spacing: 0.07em; }
+
+  .hero__stats-inner { padding: 0 10px; }
+  .hero__stat { padding: 22px 10px; }
+  .hero__stat-icon-wrap { width: 42px; height: 42px; margin-bottom: 10px; }
+}
+
+/* Small Mobile */
+@media (max-width: 380px) {
+  .hero__content { padding-right: 14px; padding-left: 14px; }
+  .hero__btn { padding: 0 12px; }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

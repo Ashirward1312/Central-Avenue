@@ -48,6 +48,40 @@ export default function Header() {
     setDropdownOpen(false);
   };
 
+  const handleHomeClick = (e) => {
+    setMenuOpen(false);
+    setDropdownOpen(false);
+
+    if (currentPath === "/") {
+      e?.preventDefault();
+      const hero = document.getElementById("home");
+      if (hero) {
+        hero.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      }
+    } else {
+      navigate("/");
+      setTimeout(() => {
+        const hero = document.getElementById("home");
+        if (hero) {
+          hero.scrollIntoView({ behavior: "smooth" });
+        } else {
+          window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        }
+      }, 50);
+    }
+  };
+
+  const handleNavClick = (path) => (e) => {
+    setMenuOpen(false);
+    setDropdownOpen(false);
+    if (currentPath === path) {
+      e?.preventDefault();
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  };
+
   const isBlockActive = currentPath.startsWith("/block/");
   const isHomePage = currentPath === "/";
   const isHeaderSolid = scrolled || !isHomePage;
@@ -57,7 +91,7 @@ export default function Header() {
       <div className="ca-header__inner">
 
         {/* ── Logo ── */}
-        <Link to="/" className="ca-logo" onClick={handleLinkClick}>
+        <Link to="/" className="ca-logo" onClick={handleHomeClick}>
           <div className="ca-logo__mark">
             <div className="ca-logo__bar ca-logo__bar--a" />
             <div className="ca-logo__bar ca-logo__bar--b" />
@@ -74,7 +108,7 @@ export default function Header() {
           <Link
             to="/"
             className={`ca-nav__link${currentPath === "/" ? " active" : ""}`}
-            onClick={handleLinkClick}
+            onClick={handleHomeClick}
           >
             Home
           </Link>
@@ -121,16 +155,24 @@ export default function Header() {
           </div>
 
           <Link
+            to="/amenities"
+            className={`ca-nav__link${currentPath === "/amenities" ? " active" : ""}`}
+            onClick={handleNavClick("/amenities")}
+          >
+            Amenities
+          </Link>
+
+          <Link
             to="/about"
             className={`ca-nav__link${currentPath === "/about" ? " active" : ""}`}
-            onClick={handleLinkClick}
+            onClick={handleNavClick("/about")}
           >
             About
           </Link>
           <Link
             to="/contact"
             className={`ca-nav__link${currentPath === "/contact" ? " active" : ""}`}
-            onClick={handleLinkClick}
+            onClick={handleNavClick("/contact")}
           >
             Contact
           </Link>
@@ -141,7 +183,7 @@ export default function Header() {
           <Link
             to="/contact"
             className="ca-btn-primary desktop-only"
-            onClick={handleLinkClick}
+            onClick={handleNavClick("/contact")}
           >
             Enquire Now
           </Link>
@@ -162,7 +204,7 @@ export default function Header() {
           <Link
             to="/"
             className={`ca-mobile-menu__link${currentPath === "/" ? " active" : ""}`}
-            onClick={handleLinkClick}
+            onClick={handleHomeClick}
           >
             Home
           </Link>
@@ -204,16 +246,23 @@ export default function Header() {
           </div>
 
           <Link
+            to="/amenities"
+            className={`ca-mobile-menu__link${currentPath === "/amenities" ? " active" : ""}`}
+            onClick={handleNavClick("/amenities")}
+          >
+            Amenities
+          </Link>
+          <Link
             to="/about"
             className={`ca-mobile-menu__link${currentPath === "/about" ? " active" : ""}`}
-            onClick={handleLinkClick}
+            onClick={handleNavClick("/about")}
           >
             About
           </Link>
           <Link
             to="/contact"
             className={`ca-mobile-menu__link${currentPath === "/contact" ? " active" : ""}`}
-            onClick={handleLinkClick}
+            onClick={handleNavClick("/contact")}
           >
             Contact
           </Link>

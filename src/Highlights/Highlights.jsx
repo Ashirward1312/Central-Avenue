@@ -1,8 +1,8 @@
-import imgFood from "../Images/food.jpg";
-import imgTarget from "../Images/Target.jpg";
+import imgFood from "../Images/foodcourt.jpg";
+import imgTarget from "../Images/office.jpg";
 import imgParking from "../Images/parking.jpg";
-import imgMost from "../Images/most.jpg";
-import imgLocation from "../Images/1.jpg";
+import imgMost from "../Images/hero2.jpg";
+import imgLocation from "../Images/office.jpg";
 import {
   UtensilsCrossed,
   Dumbbell,

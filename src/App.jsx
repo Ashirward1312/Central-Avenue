@@ -14,7 +14,7 @@ import { useLocation } from "react-router-dom";
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [pathname]);
   return null;
 }
@@ -24,7 +24,6 @@ function Home() {
     <main>
       <Hero />
       <Highlights />
-      <Amenities />
     </main >
   );
 }
@@ -36,6 +35,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/amenities" element={<Amenities />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/block/:id" element={<BlockDetail />} />

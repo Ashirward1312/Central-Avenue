@@ -1,12 +1,13 @@
 import { FaInstagram, FaFacebookF, FaTwitter } from "react-icons/fa";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const NAV = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Highlights", href: "#highlights" },
-  { label: "Amenities", href: "#amenities" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", to: "/" },
+  { label: "About", to: "/about" },
+  // { label: "Highlights", to: "/", hash: "highlights" },
+  { label: "Amenities", to: "/", hash: "amenities" },
+  { label: "Contact", to: "/contact" },
 ];
 
 const SOCIALS = [
@@ -17,6 +18,52 @@ const SOCIALS = [
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleFooterHome = (e) => {
+    e.preventDefault();
+    if (location.pathname === "/") {
+      const hero = document.getElementById("home");
+      if (hero) {
+        hero.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      }
+    } else {
+      navigate("/");
+      setTimeout(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      }, 50);
+    }
+  };
+
+  const handleFooterLink = (n) => (e) => {
+    if (n.to === "/" && !n.hash) {
+      handleFooterHome(e);
+      return;
+    }
+
+    if (n.hash) {
+      e.preventDefault();
+      if (location.pathname === "/") {
+        const el = document.getElementById(n.hash);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      } else {
+        navigate("/");
+        setTimeout(() => {
+          const el = document.getElementById(n.hash);
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }, 80);
+      }
+      return;
+    }
+
+    if (location.pathname === n.to) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  };
 
   return (
     <footer className="ft">
@@ -27,7 +74,7 @@ export default function Footer() {
 
           {/* Logo */}
           <div className="ft__brand">
-            <a href="#home" className="ft__logo">
+            <Link to="/" onClick={handleFooterHome} className="ft__logo">
               <div className="ft__logoMark">
                 <div className="ft__bar ft__bar--a" />
                 <div className="ft__bar ft__bar--b" />
@@ -37,7 +84,7 @@ export default function Footer() {
                 <div className="ft__logoName">Central</div>
                 <div className="ft__logoSub">Avenue</div>
               </div>
-            </a>
+            </Link>
             <p className="ft__tagline">
               A premium commercial destination in Kamal Vihar, Raipur — home to food joints, gyms, salons, retail shops and corporate offices. Possession ready.
             </p>
@@ -64,9 +111,14 @@ export default function Footer() {
             <div className="ft__colTitle">Quick Links</div>
             <nav className="ft__nav">
               {NAV.map((n) => (
-                <a key={n.label} href={n.href} className="ft__navLink">
+                <Link
+                  key={n.label}
+                  to={n.to}
+                  onClick={handleFooterLink(n)}
+                  className="ft__navLink"
+                >
                   {n.label}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>
